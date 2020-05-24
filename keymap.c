@@ -10,57 +10,10 @@ extern uint8_t is_master;
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     EMOJI,
-    RAISE
-};
-
-// tap dance declarations
-enum {
-    DELETE = 0,
-    SIGN   = 1,
-    QUOTE  = 2
-};
-
-void td_sign_finished(qk_tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        register_code(KC_MINUS);
-    } else {
-        register_code(KC_RSHIFT);
-        register_code(KC_EQUAL);
-    }
-}
-
-void td_sign_reset(qk_tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        unregister_code(KC_MINUS);
-    } else {
-        unregister_code(KC_RSHIFT);
-        unregister_code(KC_EQUAL);
-    }
-}
-
-void td_quote_finished(qk_tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        register_code(KC_QUOTE);
-    } else {
-        register_code(KC_RSHIFT);
-        register_code(KC_QUOTE);
-    }
-}
-
-void td_quote_reset(qk_tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        unregister_code(KC_QUOTE);
-    } else {
-        unregister_code(KC_RSHIFT);
-        unregister_code(KC_QUOTE);
-    }
-}
-
-// tap dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [DELETE] = ACTION_TAP_DANCE_DOUBLE(KC_BSPC, KC_DEL),
-    [SIGN]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_sign_finished, td_sign_reset),
-    [QUOTE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_quote_finished, td_quote_reset)
+    RAISE,
+    DELETE,
+    SIGN,
+    QUOTE
 };
 
 enum unicode_names {
@@ -137,9 +90,9 @@ enum macro_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,     TD(DELETE), \
+              KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,         DELETE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
-      LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,           KC_J,    KC_K,    KC_L, KC_SCLN,     TD(QUOTE), \
+      LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,           KC_J,    KC_K,    KC_L, KC_SCLN,         QUOTE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
        LALT_T(KC_F3),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,           KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_T(KC_F4), \
   //|---------------+--------+--------+--------+--------+--------+--------|  |--------+--------+---------------+--------+--------+--------+--------------|
@@ -149,9 +102,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_EMOJI] = LAYOUT( \
   //,---------------------------------------------------------------------------------------.  ,---------------------------------------------------------------------------------.
-              KC_TAB, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), X(TONGUE),      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),    TD(DELETE), \
+              KC_TAB, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), X(TONGUE),      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),        DELETE, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
-      LCMD_T(KC_ESC),      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   X(GRIN),    X(HEART),    X(JOYSTICK),       X(KISSY),   X(LAUGHING),  X(POOP),     TD(QUOTE), \
+      LCMD_T(KC_ESC),      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   X(GRIN),    X(HEART),    X(JOYSTICK),       X(KISSY),   X(LAUGHING),  X(POOP),         QUOTE, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
        LALT_T(KC_F3),         X(ZZZ),     X(X_MARK),    X(COPYRIGHT),    X(VOMIT), X(BANANA),     X(NOSE),      X(MONKEY),     X(BALLOON), X(CHECK_MARK), X(SWORD), RCTL_T(KC_F4), \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
@@ -161,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_RAISE] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              KC_TAB, KC_LPRN, KC_LCBR, KC_LBRC, KC_LABK, KC_UNDS,                       KC_EQL,        KC_RABK, KC_RBRC, KC_RCBR, KC_RPRN,    TD(DELETE), \
+              KC_TAB, KC_LPRN, KC_LCBR, KC_LBRC, KC_LABK, KC_UNDS,                       KC_EQL,        KC_RABK, KC_RBRC, KC_RCBR, KC_RPRN,        DELETE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
-      LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,           KC_7,    KC_8,    KC_9,    KC_0,      TD(SIGN), \
+      LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,           KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
        LALT_T(KC_F3),  KC_GRV, KC_HOME, KC_PGDN, KC_PGUP,  KC_END,                      KC_LEFT,        KC_DOWN,   KC_UP, KC_RGHT, KC_BSLS, RCTL_T(KC_F4), \
   //|---------------+--------+--------+--------+--------+--------+--------|  |--------+--------+---------------+--------+--------+--------+--------------|
@@ -180,10 +133,9 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 void matrix_init_user(void) {
-    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-    #ifdef SSD1306OLED
-        iota_gfx_init(!has_usb());   // turns on the display
-    #endif
+#ifdef SSD1306OLED
+    iota_gfx_init(!has_usb());   // turns on the display
+#endif
 }
 
 #ifdef SSD1306OLED
@@ -230,6 +182,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
 
+    const uint8_t mod_state = get_mods();
     switch (keycode) {
     case QWERTY:
         if (record->event.pressed) {
@@ -248,6 +201,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_RAISE);
         } else {
             layer_off(_RAISE);
+        }
+        return false;
+    case DELETE:
+        if (record->event.pressed) {
+            if(get_mods() & MOD_MASK_SHIFT) {
+                clear_mods();
+                tap_code(KC_BSPC);
+                set_mods(mod_state);
+            } else {
+                tap_code(KC_DEL);
+            }
+        }
+        return false;
+    case SIGN:
+        if (record->event.pressed) {
+            if(get_mods() & MOD_MASK_SHIFT) {
+                clear_mods();
+                set_mods(MOD_MASK_SHIFT);
+                tap_code(KC_EQUAL);
+                clear_mods();
+                set_mods(mod_state);
+            } else {
+                tap_code(KC_MINUS);
+            }
+        }
+        return false;
+    case QUOTE:
+        if (record->event.pressed) {
+            if(get_mods() & MOD_MASK_SHIFT) {
+                tap_code(KC_QUOTE);
+            } else {
+                clear_mods();
+                set_mods(MOD_MASK_SHIFT);
+                tap_code(KC_QUOTE);
+                clear_mods();
+                set_mods(mod_state);
+            }
         }
         return false;
     }
