@@ -1,6 +1,5 @@
 
 # key settings
-TAP_DANCE_ENABLE=yes
 UNICODEMAP_ENABLE = yes
 
 # OLED display settings
