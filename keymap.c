@@ -131,11 +131,11 @@ const uint32_t PROGMEM unicode_map[] = {
 
 
 enum macro_keycodes {
-  KC_SAMPLEMACRO,
+    KC_SAMPLEMACRO,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_QUERTY] = LAYOUT( \
+    [_QWERTY] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
               KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,     TD(DELETE), \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
