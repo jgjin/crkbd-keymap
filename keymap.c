@@ -182,7 +182,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
 
-    const uint8_t mod_state = get_mods();
     switch (keycode) {
     case QWERTY:
         if (record->event.pressed) {
@@ -203,40 +202,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_RAISE);
         }
         return false;
-    case DELETE:
+    case DELETE: ;
+        uint8_t kc = KC_BSPC;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_DEL;
+        }
+
         if (record->event.pressed) {
-            if(get_mods() & MOD_MASK_SHIFT) {
-                clear_mods();
-                tap_code(KC_BSPC);
-                set_mods(mod_state);
-            } else {
-                tap_code(KC_DEL);
-            }
+            register_code(kc);
+        } else {
+            unregister_code(kc);
         }
         return false;
     case SIGN:
-        if (record->event.pressed) {
-            if(get_mods() & MOD_MASK_SHIFT) {
-                clear_mods();
-                set_mods(MOD_MASK_SHIFT);
-                tap_code(KC_EQUAL);
-                clear_mods();
-                set_mods(mod_state);
+        if (get_mods() & MOD_MASK_SHIFT) {
+            if (record->event.pressed) {
+                register_code(KC_RSHIFT);
+                register_code(KC_EQUAL);
             } else {
-                tap_code(KC_MINUS);
+                unregister_code(KC_RSHIFT);
+                unregister_code(KC_EQUAL);
+            }
+        } else {
+            if (record->event.pressed) {
+                register_code(KC_MINUS);
+            } else {
+                unregister_code(KC_MINUS);
             }
         }
         return false;
+    }
     case QUOTE:
-        if (record->event.pressed) {
-            if(get_mods() & MOD_MASK_SHIFT) {
-                tap_code(KC_QUOTE);
+        if (get_mods() & MOD_MASK_SHIFT) {
+            if (record->event.pressed) {
+                register_code(KC_QUOTE);
             } else {
-                clear_mods();
-                set_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOTE);
-                clear_mods();
-                set_mods(mod_state);
+                unregister_code(KC_QUOTE);
+            }
+        } else {
+            if (record->event.pressed) {
+                register_code(KC_RSHIFT);
+                register_code(KC_QUOTE);
+            } else {
+                unregister_code(KC_RSHIFT);
+                unregister_code(KC_QUOTE);
             }
         }
         return false;
