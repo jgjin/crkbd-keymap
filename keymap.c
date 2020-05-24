@@ -231,7 +231,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
         }
         return false;
-    }
     case QUOTE:
         if (get_mods() & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
