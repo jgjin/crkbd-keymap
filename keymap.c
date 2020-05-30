@@ -196,7 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
 
-    uint8_t kc;
+    uint16_t custom_keycode;
     switch (keycode) {
     case QWERTY:
         if (record->event.pressed) {
@@ -218,162 +218,154 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case DELETE: ;
-        kc = KC_BSPC;
+        custom_keycode = KC_BSPC;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_DEL;
+            custom_keycode = KC_DEL;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case SIGN: ;
-        kc = KC_MINUS;
+        custom_keycode = KC_MINUS;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_PLUS;
+            custom_keycode = KC_PLUS;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case QUOTE: ;
-        kc = KC_DQUO;
+        custom_keycode = KC_DQUO;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_QUOTE;
+            unregister_code16(KC_RSFT);
+            custom_keycode = KC_QUOTE;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case DELTONGUE:
         if (record->event.pressed) {
-            register_code(KC_BSPC);
-            unregister_code(KC_BSPC);
-            register_code(X(TONGUE));
-        } else {
-            unregister_code(X(TONGUE));
+            tap_code(KC_BSPC);
+            send_unicode_hex_string("1F445");
         }
         return false;
     case DELGRIN:
         if (record->event.pressed) {
-            register_code(KC_BSPC);
-            unregister_code(KC_BSPC);
-            register_code(X(GRIN));
-        } else {
-            unregister_code(X(GRIN));
+            tap_code(KC_BSPC);
+            send_unicode_hex_string("1F600");
         }
         return false;
     case DELBANANA:
         if (record->event.pressed) {
-            register_code(KC_BSPC);
-            unregister_code(KC_BSPC);
-            register_code(X(BANANA));
-        } else {
-            unregister_code(X(BANANA));
+            tap_code(KC_BSPC);
+            send_unicode_hex_string("1F34C");
         }
         return false;
     case LEFTPRN: ;
-        kc = KC_LPRN;
+        custom_keycode = KC_LPRN;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_HOME;
+            custom_keycode = KC_HOME;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case LEFTCBR: ;
-        kc = KC_LCBR;
+        custom_keycode = KC_LCBR;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_PGDOWN;
+            custom_keycode = KC_PGDOWN;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case LEFTBRC: ;
-        kc = KC_LBRC;
+        custom_keycode = KC_LBRC;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_PGUP;
+            custom_keycode = KC_PGUP;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case LEFTABK: ;
-        kc = KC_LABK;
+        custom_keycode = KC_LABK;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_END;
+            custom_keycode = KC_END;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case RGHTABK: ;
-        kc = KC_LEFT;
+        custom_keycode = KC_LEFT;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_RABK;
+            custom_keycode = KC_RABK;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case RGHTBRC: ;
-        kc = KC_DOWN;
+        custom_keycode = KC_DOWN;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_RBRC;
+            custom_keycode = KC_RBRC;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case RGHTCBR: ;
-        kc = KC_UP;
+        custom_keycode = KC_UP;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_RCBR;
+            custom_keycode = KC_RCBR;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     case RGHTPRN: ;
-        kc = KC_RIGHT;
+        custom_keycode = KC_RIGHT;
         if (get_mods() & MOD_MASK_SHIFT) {
-            kc = KC_RPRN;
+            custom_keycode = KC_RPRN;
         }
 
         if (record->event.pressed) {
-            register_code(kc);
+            register_code16(custom_keycode);
         } else {
-            unregister_code(kc);
+            unregister_code16(custom_keycode);
         }
         return false;
     }
