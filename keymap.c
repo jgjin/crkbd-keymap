@@ -18,7 +18,17 @@ enum custom_keycodes {
     QUOTE,
     DELTONGUE,
     DELGRIN,
-    DELBANANA
+    DELBANANA,
+    LEFTPRN,
+    LEFTCBR,
+    LEFTBRC,
+    LEFTABK,
+    UNDRSCR,
+    EQLSGN,
+    RGHTABK,
+    RGHTBRC,
+    RGHTCBR,
+    RGHTPRN
 };
 
 enum unicode_names {
@@ -119,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_RAISE] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              KC_TAB, KC_LPRN, KC_LCBR, KC_LBRC, KC_LABK, KC_UNDS,                       KC_EQL,        KC_RABK, KC_RBRC, KC_RCBR, KC_RPRN,        DELETE, \
+              KC_TAB, LEFTPRN, LEFTCBR, LEFTBRC, LEFTABK, UNDRSCR,                       EQLSGN,        RGHTABK, RGHTBRC, RGHTCBR, RGHTPRN,        DELETE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
       LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,           KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
@@ -220,38 +230,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(kc);
         }
         return false;
-    case SIGN:
+    case SIGN: ;
+        uint8_t kc = KC_MINUS;
         if (get_mods() & MOD_MASK_SHIFT) {
-            if (record->event.pressed) {
-                register_code(KC_RSHIFT);
-                register_code(KC_EQUAL);
-            } else {
-                unregister_code(KC_RSHIFT);
-                unregister_code(KC_EQUAL);
-            }
+            kc = KC_PLUS;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
         } else {
-            if (record->event.pressed) {
-                register_code(KC_MINUS);
-            } else {
-                unregister_code(KC_MINUS);
-            }
+            unregister_code(kc);
         }
         return false;
-    case QUOTE:
+    case QUOTE: ;
+        uint8_t kc = KC_DQUO;
         if (get_mods() & MOD_MASK_SHIFT) {
-            if (record->event.pressed) {
-                register_code(KC_QUOTE);
-            } else {
-                unregister_code(KC_QUOTE);
-            }
+            kc = KC_QUOTE;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
         } else {
-            if (record->event.pressed) {
-                register_code(KC_RSHIFT);
-                register_code(KC_QUOTE);
-            } else {
-                unregister_code(KC_RSHIFT);
-                unregister_code(KC_QUOTE);
-            }
+            unregister_code(kc);
         }
         return false;
     case DELTONGUE:
@@ -279,6 +279,126 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             register_code(X(BANANA));
         } else {
             unregister_code(X(BANANA));
+        }
+        return false;
+    case LEFTPRN: ;
+        uint8_t kc = KC_EXLM;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_LPRN;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case LEFTCBR: ;
+        uint8_t kc = KC_AT;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_LCBR;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case LEFTBRC: ;
+        uint8_t kc = KC_HASH;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_LBRC;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case LEFTABK: ;
+        uint8_t kc = KC_HASH;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_LABK;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case UNDRSCR: ;
+        uint8_t kc = KC_DOLLAR;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_UNDERSCORE;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case EQLSGN: ;
+        uint8_t kc = KC_PERCENT;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_EQUAL;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case RGHTABK: ;
+        uint8_t kc = KC_CIRCUMFLEX;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_RABK;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case RGHTBRC: ;
+        uint8_t kc = KC_AMPERSAND;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_RBRC;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case RGHTCBR: ;
+        uint8_t kc = KC_LPRN;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_RCBR;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
+        }
+        return false;
+    case RGHTPRN: ;
+        uint8_t kc = KC_RPRN;
+        if (get_mods() & MOD_MASK_SHIFT) {
+            kc = KC_RPRN;
+        }
+
+        if (record->event.pressed) {
+            register_code(kc);
+        } else {
+            unregister_code(kc);
         }
         return false;
     }
