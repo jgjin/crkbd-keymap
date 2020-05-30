@@ -132,11 +132,8 @@ void persistent_default_layer_set(uint16_t default_layer) {
     default_layer_set(default_layer);
 }
 
-void eeconfig_init_user(void) {
-    set_unicode_input_mode(UC_LNX);
-}
-
 void matrix_init_user(void) {
+    set_unicode_input_mode(UC_LNX);
 #ifdef SSD1306OLED
     iota_gfx_init(!has_usb());   // turns on the display
 #endif
