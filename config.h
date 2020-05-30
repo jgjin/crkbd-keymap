@@ -16,3 +16,6 @@
 
 // threshold (in ms) to interpret tap rather than hold
 #define TAPPING_TERM 200
+
+// IBus unicode support
+#define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
