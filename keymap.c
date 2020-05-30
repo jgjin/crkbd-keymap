@@ -13,6 +13,7 @@ enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     EMOJI,
     RAISE,
+    F2_3,
     DELETE,
     SIGN,
     QUOTE,
@@ -196,6 +197,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
 
+    const uint8_t mod_state = get_mods();
     uint16_t custom_keycode;
     switch (keycode) {
     case QWERTY:
@@ -217,9 +219,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_RAISE);
         }
         return false;
+    case F2_3: ;
+        custom_keycode = KC_F3;
+        if (mod_state & MOD_MASK_SHIFT) {
+            custom_keycode = KC_F2;
+        }
+
+        if (record->event.pressed) {
+            register_code16(custom_keycode);
+        } else {
+            unregister_code16(custom_keycode);
+        }
+        return false;
     case DELETE: ;
         custom_keycode = KC_BSPC;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_DEL;
         }
 
@@ -231,7 +245,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case SIGN: ;
         custom_keycode = KC_MINUS;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_PLUS;
         }
 
@@ -242,13 +256,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case QUOTE: ;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
-                unregister_code16(KC_RSFT);
-                register_code16(KC_QUOTE);
-            } else {
-                unregister_code16(KC_QUOTE);
-                register_code16(KC_RSFT);
+                clear_mods();
+                tap_code(KC_QUOTE);
+                set_mods(mod_state);
             }
         } else {
             if (record->event.pressed) {
@@ -278,7 +290,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case LEFTPRN: ;
         custom_keycode = KC_LPRN;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_HOME;
         }
 
@@ -290,7 +302,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case LEFTCBR: ;
         custom_keycode = KC_LCBR;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_PGDOWN;
         }
 
@@ -302,7 +314,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case LEFTBRC: ;
         custom_keycode = KC_LBRC;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_PGUP;
         }
 
@@ -314,7 +326,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case LEFTABK: ;
         custom_keycode = KC_LABK;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_END;
         }
 
@@ -326,7 +338,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case RGHTABK: ;
         custom_keycode = KC_LEFT;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_RABK;
         }
 
@@ -337,25 +349,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
-                unregister_code16(KC_RSFT);
-                register_code16(KC_RBRC);
-            } else {
-                unregister_code16(KC_RBRC);
-                register_code16(KC_RSFT);
+                clear_mods();
+                tap_code(KC_RBRC);
+                set_mods(mod_state);
             }
         } else {
             if (record->event.pressed) {
                 register_code16(KC_DOWN);
             } else {
-                unregister_code16(KC_DDOWN);
+                unregister_code16(KC_DOWN);
             }
         }
         return false;
     case RGHTCBR: ;
         custom_keycode = KC_UP;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_RCBR;
         }
 
@@ -367,7 +377,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case RGHTPRN: ;
         custom_keycode = KC_RIGHT;
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_RPRN;
         }
 
