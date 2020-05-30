@@ -242,16 +242,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case QUOTE: ;
-        custom_keycode = KC_DQUO;
         if (get_mods() & MOD_MASK_SHIFT) {
-            unregister_code16(KC_RSFT);
-            custom_keycode = KC_QUOTE;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
+            if (record->event.pressed) {
+                unregister_code16(KC_RSFT);
+                register_code16(KC_QUOTE);
+            } else {
+                unregister_code16(KC_QUOTE);
+                register_code16(KC_RSFT);
+            }
         } else {
-            unregister_code16(custom_keycode);
+            if (record->event.pressed) {
+                register_code16(KC_DQUO);
+            } else {
+                unregister_code16(KC_DQUO);
+            }
         }
         return false;
     case DELTONGUE:
@@ -333,15 +337,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
-        custom_keycode = KC_DOWN;
         if (get_mods() & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RBRC;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
+            if (record->event.pressed) {
+                unregister_code16(KC_RSFT);
+                register_code16(KC_RBRC);
+            } else {
+                unregister_code16(KC_RBRC);
+                register_code16(KC_RSFT);
+            }
         } else {
-            unregister_code16(custom_keycode);
+            if (record->event.pressed) {
+                register_code16(KC_DOWN);
+            } else {
+                unregister_code16(KC_DDOWN);
+            }
         }
         return false;
     case RGHTCBR: ;
