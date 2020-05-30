@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+#include "process_unicode.h"
+
 extern uint8_t is_master;
 
 // layer names for readability
