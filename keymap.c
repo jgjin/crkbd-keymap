@@ -13,7 +13,7 @@ enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     EMOJI,
     RAISE,
-    F2_F3,
+    TAB_F2,
     DELETE,
     SIGN,
     QUOTE,
@@ -104,11 +104,11 @@ enum macro_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
   //,------------------------------------------------------------.                    ,-------------------------------------------------------------------.
-              KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,         DELETE, \
+              TAB_F2,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,         DELETE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
       LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,           KC_J,    KC_K,    KC_L, KC_SCLN,         QUOTE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
-        LALT_T(F2_F3),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,           KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_T(KC_F4), \
+       LALT_T(KC_F3),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,           KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_T(KC_F4), \
   //|---------------+--------+--------+--------+--------+--------+--------|  |--------+--------+---------------+--------+--------+--------+--------------|
                                                   KC_SPC,   EMOJI, XXXXXXX,    XXXXXXX,   RAISE, RSFT_T(KC_ENT) \
                                              //`--------------------------'  `---------------------------------'
@@ -116,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_EMOJI] = LAYOUT( \
   //,---------------------------------------------------------------------------------------.  ,---------------------------------------------------------------------------------.
-              KC_TAB, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),        DELETE, \
+              TAB_F2, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),        DELETE, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
       LCMD_T(KC_ESC),      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   DELGRIN,    X(HEART),    X(JOYSTICK),       X(KISSY),   X(LAUGHING),  X(POOP),         QUOTE, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
-       LALT_T(F2_F3),         X(ZZZ),     X(X_MARK),    X(COPYRIGHT),    X(VOMIT), DELBANANA,     X(NOSE),      X(MONKEY),     X(BALLOON), X(CHECK_MARK), X(SWORD), RCTL_T(KC_F4), \
+       LALT_T(KC_F3),         X(ZZZ),     X(X_MARK),    X(COPYRIGHT),    X(VOMIT), DELBANANA,     X(NOSE),      X(MONKEY),     X(BALLOON), X(CHECK_MARK), X(SWORD), RCTL_T(KC_F4), \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
                                                               KC_SPC,       EMOJI,   XXXXXXX,     XXXXXXX,          RAISE, RSFT_T(KC_ENT) \
                                                  //`----------------------------------------'  `-----------------------------------------'
@@ -128,11 +128,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_RAISE] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC,        KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,        DELETE, \
+              TAB_F2, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC,        KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,        DELETE, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
       LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,           KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
   //|---------------+--------+--------+--------+--------+--------|                    |--------+---------------+--------+--------+--------+--------------|
-       LALT_T(F2_F3),  KC_GRV, LEFTPRN, LEFTCBR, LEFTBRC, LEFTABK,                      RGHTABK,        RGHTBRC, RGHTCBR, RGHTPRN, KC_BSLS, RCTL_T(KC_F4), \
+       LALT_T(KC_F3),  KC_GRV, LEFTPRN, LEFTCBR, LEFTBRC, LEFTABK,                      RGHTABK,        RGHTBRC, RGHTCBR, RGHTPRN, KC_BSLS, RCTL_T(KC_F4), \
   //|---------------+--------+--------+--------+--------+--------+--------|  |--------+--------+---------------+--------+--------+--------+--------------|
                                                   KC_SPC,   EMOJI, XXXXXXX,    XXXXXXX,   RAISE, RSFT_T(KC_ENT) \
                                              //`--------------------------'  `---------------------------------'
@@ -219,8 +219,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_RAISE);
         }
         return false;
-    case F2_F3: ;
-        custom_keycode = KC_F3;
+    case TAB_F2: ;
+        custom_keycode = KC_TAB;
         if (mod_state & MOD_MASK_SHIFT) {
             custom_keycode = KC_F2;
         }
