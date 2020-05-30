@@ -196,6 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
 
+    uint8_t kc;
     switch (keycode) {
     case QWERTY:
         if (record->event.pressed) {
@@ -217,7 +218,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case DELETE: ;
-        uint8_t kc = KC_BSPC;
+        kc = KC_BSPC;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_DEL;
         }
@@ -229,7 +230,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case SIGN: ;
-        uint8_t kc = KC_MINUS;
+        kc = KC_MINUS;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_PLUS;
         }
@@ -241,7 +242,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case QUOTE: ;
-        uint8_t kc = KC_DQUO;
+        kc = KC_DQUO;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_QUOTE;
         }
@@ -280,7 +281,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case LEFTPRN: ;
-        uint8_t kc = KC_LPRN;
+        kc = KC_LPRN;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_HOME;
         }
@@ -292,7 +293,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case LEFTCBR: ;
-        uint8_t kc = KC_LCBR;
+        kc = KC_LCBR;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_PGDOWN;
         }
@@ -304,7 +305,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case LEFTBRC: ;
-        uint8_t kc = KC_LBRC;
+        kc = KC_LBRC;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_PGUP;
         }
@@ -316,7 +317,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case LEFTABK: ;
-        uint8_t kc = KC_LABK;
+        kc = KC_LABK;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_END;
         }
@@ -328,7 +329,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTABK: ;
-        uint8_t kc = KC_LEFT;
+        kc = KC_LEFT;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_RABK;
         }
@@ -340,7 +341,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
-        uint8_t kc = KC_DOWN;
+        kc = KC_DOWN;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_RBRC;
         }
@@ -352,7 +353,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTCBR: ;
-        uint8_t kc = KC_UP;
+        kc = KC_UP;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_RCBR;
         }
@@ -364,7 +365,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTPRN: ;
-        uint8_t kc = KC_RIGHT;
+        kc = KC_RIGHT;
         if (get_mods() & MOD_MASK_SHIFT) {
             kc = KC_RPRN;
         }
