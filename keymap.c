@@ -155,11 +155,7 @@ void matrix_init_user(void) {
 
 #ifdef SSD1306OLED
 
-const char *read_layer_state(void);
 const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
 
 void matrix_scan_user(void) {
     iota_gfx_task();
@@ -167,8 +163,7 @@ void matrix_scan_user(void) {
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
     if (is_master) {
-        matrix_write_ln(matrix, read_layer_state());
-        matrix_write_ln(matrix, read_keylog());
+        matrix_write(matrix, read_logo());
     } else {
         matrix_write(matrix, read_logo());
     }
@@ -191,12 +186,6 @@ void iota_gfx_task_user(void) {
 #endif // SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-#ifdef SSD1306OLED
-        set_keylog(keycode, record);
-#endif
-    }
-
     const uint8_t mod_state = get_mods();
     uint16_t custom_keycode;
     switch (keycode) {
