@@ -155,6 +155,7 @@ void matrix_init_user(void) {
 
 #ifdef SSD1306OLED
 
+const char *read_layer_state(void);
 const char *read_logo(void);
 
 void matrix_scan_user(void) {
@@ -163,7 +164,8 @@ void matrix_scan_user(void) {
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
     if (is_master) {
-        matrix_write(matrix, read_logo());
+        matrix_write_ln(matrix, read_layer_state());
+        matrix_write_ln(matrix, "\npodex perfectus es");
     } else {
         matrix_write(matrix, read_logo());
     }
