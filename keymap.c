@@ -13,8 +13,6 @@ enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     EMOJI,
     RAISE,
-    TAB_F2,
-    DELETE,
     SIGN,
     QUOTE,
     DELTONGUE,
@@ -104,7 +102,7 @@ enum macro_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              TAB_F2,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,         DELETE, \
+              KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,        KC_BSPC, \
   //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
       LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,         QUOTE, \
   //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
@@ -116,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_EMOJI] = LAYOUT( \
   //,---------------------------------------------------------------------------------------.  ,---------------------------------------------------------------------------------.
-              TAB_F2, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),        DELETE, \
+              KC_TAB, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),       KC_BSPC, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
       LCMD_T(KC_ESC),      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   DELGRIN,    X(HEART),    X(JOYSTICK),       X(KISSY),   X(LAUGHING),  X(POOP),         QUOTE, \
   //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
@@ -128,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_RAISE] = LAYOUT( \
   //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              TAB_F2, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                             KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,        DELETE, \
+               KC_F2, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                             KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,        KC_DEL, \
   //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
       LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                KC_6,    KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
   //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
@@ -155,7 +153,6 @@ void matrix_init_user(void) {
 
 #ifdef SSD1306OLED
 
-const char *read_layer_state(void);
 const char *read_logo(void);
 
 void matrix_scan_user(void) {
@@ -164,8 +161,7 @@ void matrix_scan_user(void) {
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
     if (is_master) {
-        matrix_write_ln(matrix, read_layer_state());
-        matrix_write_ln(matrix, "\npodex perfectus es");
+        matrix_write(matrix, read_logo());
     } else {
         matrix_write(matrix, read_logo());
     }
@@ -208,30 +204,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_RAISE);
         } else {
             layer_off(_RAISE);
-        }
-        return false;
-    case TAB_F2: ;
-        custom_keycode = KC_TAB;
-        if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_F2;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
-        } else {
-            unregister_code16(custom_keycode);
-        }
-        return false;
-    case DELETE: ;
-        custom_keycode = KC_BSPC;
-        if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_DEL;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
-        } else {
-            unregister_code16(custom_keycode);
         }
         return false;
     case SIGN: ;
