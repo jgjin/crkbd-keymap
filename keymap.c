@@ -101,39 +101,39 @@ enum macro_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
-  //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-              KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,        KC_BSPC, \
-  //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
-      LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,         QUOTE, \
-  //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
-       LALT_T(KC_F3),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_T(KC_F4), \
-  //|---------------+--------+--------+--------+--------+--------+--------|  |--------+---------------+--------+--------+--------+--------+--------------|
-                                                   EMOJI,  KC_SPC, XXXXXXX,    XXXXXXX, RSFT_T(KC_ENT),   RAISE \
-                                             //`--------------------------'  `---------------------------------'
+  //,------------------------------------------------------------------------.                    ,---------------------------------------------------------------------.
+               KC_TAB,    KC_Q,    KC_W,    KC_E,               KC_R,    KC_T,                                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,         KC_BSPC, \
+  //|----------------+--------+--------+--------+-------------------+--------|                    |----------------+--------+--------+--------+--------+----------------|
+       LCMD_T(KC_ESC),    KC_A,    KC_S,    KC_D,               KC_F,    KC_G,                                 KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,           QUOTE, \
+  //|----------------+--------+--------+--------+-------------------+--------|                    |----------------+--------+--------+--------+--------+----------------|
+      LALT_T(KC_LEFT),    KC_Z,    KC_X,    KC_C,               KC_V,    KC_B,                                 KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_T(KC_RGHT), \
+  //|----------------+--------+--------+--------+-------------------+--------+--------|  |--------+----------------+--------+--------+--------+--------+----------------|
+                                                  LT(_EMOJI, KC_ENT),  KC_SPC, XXXXXXX,    XXXXXXX, RSFT_T(KC_BSPC),   RAISE \
+                                              //`-------------------------------------'  `----------------------------------'
     ),
 
     [_EMOJI] = LAYOUT( \
-  //,---------------------------------------------------------------------------------------.  ,---------------------------------------------------------------------------------.
-              KC_TAB, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),         X(IMP), X(OPEN_MOUTH), X(PIZZA),       KC_BSPC, \
-  //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
-      LCMD_T(KC_ESC),      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   DELGRIN,    X(HEART),    X(JOYSTICK),       X(KISSY),   X(LAUGHING),  X(POOP),         QUOTE, \
-  //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
-       LALT_T(KC_F3),         X(ZZZ),     X(X_MARK),    X(COPYRIGHT),    X(VOMIT), DELBANANA,     X(NOSE),      X(MONKEY),     X(BALLOON), X(CHECK_MARK), X(SWORD), RCTL_T(KC_F4), \
-  //|---------------+---------------+--------------+----------------+------------+----------|  |---------+---------------+---------------+--------------+---------+--------------|
-                                                               EMOJI,      KC_SPC,   XXXXXXX,     XXXXXXX, RSFT_T(KC_ENT),          RAISE \
-                                                 //`----------------------------------------'  `-----------------------------------------'
+  //,--------------------------------------------------------------------------------.  ,-----------------------------------------------------------------------.
+        KC_F2, X(QUESTIONING),     X(WIZARD),          X(EGG), X(RELIEVED), DELTONGUE,      X(YEN), X(UPSIDE_DOWN),     X(IMP), X(OPEN_MOUTH), X(PIZZA), KC_BSPC, \
+  //|--------+---------------+--------------+----------------+------------+----------|  |---------+---------------+-----------+--------------+---------+--------|
+        KC_F3,      X(ANGERY), X(SUNGLASSES), X(DISAPPOINTED),     X(FIRE),   DELGRIN,    X(HEART),    X(JOYSTICK),   X(KISSY),   X(LAUGHING),  X(POOP),  KC_F11, \
+  //|--------+---------------+--------------+----------------+------------+----------|  |---------+---------------+-----------+--------------+---------+--------|
+        KC_F4,         X(ZZZ),     X(X_MARK),    X(COPYRIGHT),    X(VOMIT), DELBANANA,     X(NOSE),      X(MONKEY), X(BALLOON), X(CHECK_MARK), X(SWORD),  KC_F12, \
+  //|--------+---------------+--------------+----------------+------------+----------|  |---------+---------------+-----------+--------------+---------+--------|
+                                                      XXXXXXX,     XXXXXXX,   XXXXXXX,     XXXXXXX,         KC_DEL,    XXXXXXX \
+                                          //`----------------------------------------'  `-------------------------------------'
     ),
 
     [_RAISE] = LAYOUT( \
-  //,------------------------------------------------------------.                    ,------------------------------------------------------------------.
-               KC_F2, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                             KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,        KC_DEL, \
-  //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
-      LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                KC_6,    KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
-  //|---------------+--------+--------+--------+--------+--------|                    |---------------+--------+--------+--------+--------+--------------|
-       LALT_T(KC_F3),  KC_GRV, LEFTPRN, LEFTCBR, LEFTBRC, LEFTABK,                             RGHTABK, RGHTBRC, RGHTCBR, RGHTPRN, KC_BSLS, RCTL_T(KC_F4), \
-  //|---------------+--------+--------+--------+--------+--------+--------|  |--------+---------------+--------+--------+--------+--------+--------------|
-                                                   EMOJI,  KC_SPC, XXXXXXX,    XXXXXXX, RSFT_T(KC_ENT),   RAISE \
-                                             //`--------------------------'  `---------------------------------'
+  //,-------------------------------------------------------------------.                    ,-----------------------------------------------------------.
+              KC_TAB, KC_EXLM,   KC_AT, KC_HASH,         KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS,  KC_EQL,       KC_BSPC, \
+  //|---------------+--------+--------+--------+---------------+--------|                    |--------+--------+--------+--------+--------+--------------|
+      LCMD_T(KC_ESC),    KC_1,    KC_2,    KC_3,           KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,          SIGN, \
+  //|---------------+--------+--------+--------+---------------+--------|                    |--------+--------+--------+--------+--------+--------------|
+       LALT_T(KC_F3),  KC_GRV, LEFTPRN, LEFTCBR,        LEFTBRC, LEFTABK,                      RGHTABK, RGHTBRC, RGHTCBR, RGHTPRN, KC_BSLS, RCTL_T(KC_F4), \
+  //|---------------+--------+--------+--------+---------------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------------|
+                                                 LSFT_T(KC_ENT),  KC_SPC, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX \
+                                             //`---------------------------------'  `--------------------------'
     )
 };
 
@@ -302,9 +302,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTABK: ;
-        custom_keycode = KC_LEFT;
+        custom_keycode = KC_RABK;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RABK;
+            custom_keycode = KC_LEFT;
         }
 
         if (record->event.pressed) {
@@ -314,24 +314,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
+        custom_keycode = KC_RBRC;
         if (mod_state & MOD_MASK_SHIFT) {
-            if (record->event.pressed) {
-                clear_mods();
-                tap_code(KC_RBRC);
-                set_mods(mod_state);
-            }
+            custom_keycode = KC_DOWN;
+        }
+
+        if (record->event.pressed) {
+            register_code16(custom_keycode);
         } else {
-            if (record->event.pressed) {
-                register_code16(KC_DOWN);
-            } else {
-                unregister_code16(KC_DOWN);
-            }
+            unregister_code16(custom_keycode);
         }
         return false;
     case RGHTCBR: ;
-        custom_keycode = KC_UP;
+        custom_keycode = KC_RCBR;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RCBR;
+            custom_keycode = KC_UP;
         }
 
         if (record->event.pressed) {
@@ -341,9 +338,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTPRN: ;
-        custom_keycode = KC_RIGHT;
+        custom_keycode = KC_RPRN;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RPRN;
+            custom_keycode = KC_RGHT;
         }
 
         if (record->event.pressed) {
