@@ -162,8 +162,7 @@ void matrix_scan_user(void) {
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
     if (is_master) {
-        matrix_write_ln(matrix, read_layer_state());
-        matrix_write_ln(matrix, "\npodex perfectus es");
+        matrix_write_ln(matrix, "\n\n  podex perfectus es");
     } else {
         matrix_write(matrix, read_logo());
     }
@@ -302,9 +301,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTABK: ;
-        custom_keycode = KC_RABK;
+        custom_keycode = KC_LEFT;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_LEFT;
+            custom_keycode = KC_RABK;
         }
 
         if (record->event.pressed) {
@@ -314,9 +313,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
-        custom_keycode = KC_RBRC;
+        custom_keycode = KC_DOWN;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_DOWN;
+            custom_keycode = KC_RBRC;
         }
 
         if (record->event.pressed) {
@@ -326,9 +325,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTCBR: ;
-        custom_keycode = KC_RCBR;
+        custom_keycode = KC_UP;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_UP;
+            custom_keycode = KC_RCBR;
         }
 
         if (record->event.pressed) {
@@ -338,9 +337,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTPRN: ;
-        custom_keycode = KC_RPRN;
+        custom_keycode = KC_RGHT;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RGHT;
+            custom_keycode = KC_RPRN;
         }
 
         if (record->event.pressed) {
