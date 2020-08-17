@@ -313,15 +313,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case RGHTBRC: ;
-        custom_keycode = KC_DOWN;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_RBRC;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
+            if (record->event.pressed) {
+                clear_mods();
+                tap_code(KC_RBRC);
+                set_mods(mod_state);
+            }
         } else {
-            unregister_code16(custom_keycode);
+            if (record->event.pressed) {
+                register_code16(KC_DOWN);
+            } else {
+                unregister_code16(KC_DOWN);
+            }
         }
         return false;
     case RGHTCBR: ;
